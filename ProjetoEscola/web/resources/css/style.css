@@ -1,0 +1,35 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16/04/2020, 11:49:22
+    Author     : frank
+*/
+
+.ui-layout-north{
+    z-index:20 !important;
+    overflow:visible !important;   
+}
+
+.ui-layout-north .ui-layout-unit-content{
+    overflow:visible !important;    
+}
+
+.ui-widget .ui-widget .ui-widget{
+    font-size:95% !important;
+}
+
+.ui-datatable-header {    
+    text-align:right   !important    
+}
+
+.ui-column-filter{
+    display:none !important
+}
+
+.hide {  
+    visibility:hidden;
+    
+}

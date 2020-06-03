@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/modeloSistema.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="menu">
+
+        <ui:include src="/includes/menu.xhtml"/>
+
+    </ui:define>
+    <ui:define name="conteudo">
+        <h:form>
+        <p:dataTable emptyMessage="Está Vazio" value="#{MBCursos.itens}" var="item"
+                     paginator="true" rows="10" widgetVar="itemfiltrado" filteredValue="#{MBCursos.filtraitens}" >
+            <f:facet name="header">
+                <p:outputPanel>
+                     <h:outputText value="Consulte: "/>
+                     <p:inputText id="globalFilter" onkeyup="PF('itemfiltrado').filter()" style="width:150px" />
+                </p:outputPanel>                
+                
+            </f:facet>
+            
+            <p:column headerText="Matricula" sortBy="#{item.ID}" filterBy="#{item.ID}" filterStyle="hide">                            
+                <h:outputText value="#{item.ID}"/>
+            </p:column>
+            <p:column headerText="Nome do curso" sortBy="#{item.NOME}" filterBy="#{item.NOME}" filterStyle="hide">                            
+                <h:outputText value="#{item.NOME}"/>
+            </p:column>
+            <p:column headerText="Requisito" sortBy="#{item.REQUISITO}" filterBy="#{item.REQUISITO}" filterStyle="hide">                            
+                <h:outputText value="#{item.REQUISITO}"/>
+            </p:column>
+            <p:column headerText="Carga Horária" sortBy="#{item.CARGA_HORARIA}" filterBy="#{item.CARGA_HORARIA}" filterStyle="hide">                            
+                <h:outputText value="#{item.CARGA_HORARIA}"/>
+            </p:column>
+            <p:column headerText="Preço" sortBy="#{item.PRECO}" filterBy="#{item.PRECO}" filterStyle="hide">                            
+                <h:outputText value="#{item.PRECO}"/>
+            </p:column>
+        
+            <f:facet name="footer">
+                <p:commandButton value="Novo Cadastro" onclick="PF('dlgIncluiNovo').show()"/>    
+            </f:facet>
+            
+        </p:dataTable>
+        </h:form>
+     
+        <h:form>
+            
+            <p:dialog  widgetVar="dlgIncluiNovo" closable="false" draggable="false" resizable="false"
+                       header="Cadastrar Curso" modal="true" appendTo="@(body)">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Nome do Curso:"/>
+                    <h:inputText size="30" maxlength="50" value=""/>
+                    <p:outputLabel value="Requisito:"/>
+                    <h:inputText size="30" maxlength="50" value=""/>
+                    <p:outputLabel value="Carga Horária:"/>
+                    <h:inputText size="30" maxlength="50" value=""/>
+                    <p:outputLabel value="Preço:"/>
+                    <h:inputText size="30" maxlength="50" value=""/> 
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Cadastrar"/>    
+                    <p:commandButton value="Cancelar" onclick="PF('dlgIncluiNovo').hide()"/>
+                </h:panelGrid>
+                             
+            </p:dialog>
+            
+            
+        </h:form>   
+        
+    </ui:define>
+
+</ui:composition>
