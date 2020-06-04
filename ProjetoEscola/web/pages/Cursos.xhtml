@@ -41,7 +41,7 @@
             </p:column>
         
             <f:facet name="footer">
-                <p:commandButton value="Novo Cadastro" onclick="PF('dlgIncluiNovo').show()"/>    
+                <p:commandButton value="Novo Cadastro" actionListener="#{MBCursos.iniciacurso()}" oncomplete="PF('dlgIncluiNovo').show()"/>    
             </f:facet>
             
         </p:dataTable>
@@ -53,16 +53,16 @@
                        header="Cadastrar Curso" modal="true" appendTo="@(body)">
                 <h:panelGrid columns="2">
                     <p:outputLabel value="Nome do Curso:"/>
-                    <h:inputText size="30" maxlength="50" value=""/>
+                    <h:inputText size="30" maxlength="50" value="#{MBCursos.cursos.NOME}"/>
                     <p:outputLabel value="Requisito:"/>
-                    <h:inputText size="30" maxlength="50" value=""/>
+                    <h:inputText size="30" maxlength="50" value="#{MBCursos.cursos.REQUISITO}"/>
                     <p:outputLabel value="Carga Horária:"/>
-                    <h:inputText size="30" maxlength="50" value=""/>
+                    <h:inputText size="30" maxlength="50" value="#{MBCursos.cursos.CARGA_HORARIA}"/>
                     <p:outputLabel value="Preço:"/>
-                    <h:inputText size="30" maxlength="50" value=""/> 
+                    <h:inputText size="30" maxlength="50" value="#{MBCursos.cursos.PRECO}"/> 
                 </h:panelGrid>
                 <h:panelGrid columns="2">
-                    <p:commandButton value="Cadastrar"/>    
+                    <p:commandButton value="Cadastrar" actionListener="#{MBCursos.cadastra()}" oncomplete="PF('dlgIncluiNovo').hide()"/>    
                     <p:commandButton value="Cancelar" onclick="PF('dlgIncluiNovo').hide()"/>
                 </h:panelGrid>
                              
