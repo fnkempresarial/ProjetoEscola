@@ -9,8 +9,6 @@ import br.com.escola.dao.CursosDAO;
 import br.com.escola.domain.Cursos;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -70,11 +68,12 @@ public class CursosBean {
    
    
    public void cadastra(){
+       cursos = new Cursos();
        CursosDAO cdao = new CursosDAO();
-        try {
+        try {           
             cdao.inserir(cursos);
-        } catch (SQLException ex) {
-            System.out.print(ex.getSQLState());
+        } catch (SQLException ex) {           
+            System.out.print(ex.getMessage());
         }
    
    }
