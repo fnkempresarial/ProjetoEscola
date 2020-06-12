@@ -68,7 +68,6 @@ public class CursosBean {
    
    
    public void cadastra(){
-       cursos = new Cursos();
        CursosDAO cdao = new CursosDAO();
         try {           
             cdao.inserir(cursos);
