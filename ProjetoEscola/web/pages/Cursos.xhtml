@@ -4,17 +4,19 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 template="/templates/modeloSistema.xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:define name="menu">
 
         <ui:include src="/includes/menu.xhtml"/>
 
     </ui:define>
+    
     <ui:define name="conteudo">
-        <h:form>
-        <p:dataTable emptyMessage="Está Vazio" value="#{MBCursos.itens}" var="item"
+        
+        <h:form id="frmCursos">
+        <p:dataTable id="tblCursos" emptyMessage="Está Vazio" value="#{MBCursos.itens}" var="item"
                      paginator="true" rows="10" widgetVar="itemfiltrado" filteredValue="#{MBCursos.filtraitens}" >
             <f:facet name="header">
                 <p:outputPanel>
@@ -41,7 +43,10 @@
             </p:column>
         
             <f:facet name="footer">
-                <p:commandButton value="Novo Cadastro" actionListener="#{MBCursos.iniciacurso()}" oncomplete="PF('dlgIncluiNovo').show()"/>    
+                <p:commandButton value="Novo Cadastro" 
+                                 actionListener="#{MBCursos.iniciacurso()}"
+                                 oncomplete="PF('dlgIncluiNovo').show()"
+                                 update=":frmdialog:grddialog"/>    
             </f:facet>
             
         </p:dataTable>
@@ -49,10 +54,10 @@
      
         
             
-            <p:dialog  widgetVar="dlgIncluiNovo" closable="false" draggable="false" resizable="false"
+            <p:dialog id="dialogNovo"  widgetVar="dlgIncluiNovo" closable="false" draggable="false" resizable="false"
                        header="Cadastrar Curso" modal="true" appendTo="@(body)">
-                <h:form>
-                <h:panelGrid columns="2">
+                <h:form id="frmdialog">
+                <h:panelGrid id="grddialog" columns="2">
                     
                     <p:outputLabel value="Nome do Curso:"/>
                     <h:inputText size="30" maxlength="50" value="#{MBCursos.cursos.NOME}"/>
@@ -63,13 +68,21 @@
                     <p:outputLabel value="Preço:"/>
                     <h:inputText size="30" maxlength="50" value="#{MBCursos.cursos.PRECO}"/> 
                 </h:panelGrid>
-                <h:panelGrid columns="2">
-                    <p:commandButton value="Cadastrar" actionListener="#{MBCursos.cadastra()}" oncomplete="PF('dlgIncluiNovo').hide()"/>    
-                    <p:commandButton value="Cancelar" onclick="PF('dlgIncluiNovo').hide()"/>
+                     
+                <h:panelGrid id="gridReposta" columns="2">
+                    <p:commandButton value="Cadastrar"
+                                     action="#{MBCursos.cadastra()}"
+                                     update=":frmCursos:tblCursos :msgGlobal"                                    
+                                     oncomplete="PF('dlgIncluiNovo').hide()" 
+                                     />
+                    
+                                     
+              
+                    <p:commandButton value="Cancelar" onclick="PF('dlgIncluiNovo').hide()" update=":frmCursos:tblCursos" />
                 </h:panelGrid>
-                  </h:form>            
+                 </h:form>            
             </p:dialog>
-            
+
             
           
         

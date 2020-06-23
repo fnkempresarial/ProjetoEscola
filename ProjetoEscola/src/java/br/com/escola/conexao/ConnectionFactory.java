@@ -17,10 +17,11 @@ public class ConnectionFactory {
 
 private static final String USUARIO = "root";
 private static final String SENHA = "";
-private static final String URL = "jdbc:mysql://localhost:3306/projetoescola";
+private static final String URL = "jdbc:mysql://localhost:3306/projetoescola?useTimezone=true&serverTimezone=UTC";
 
 public static Connection conectar() throws SQLException {
-DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+    
+DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 Connection conexao = DriverManager.getConnection(URL,USUARIO,SENHA);
 
 return conexao;
